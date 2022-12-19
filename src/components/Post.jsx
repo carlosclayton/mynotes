@@ -1,34 +1,52 @@
+
+
 import styles from './Post.module.css'
 import {Comment} from "./Comment";
 import {Avatar} from "./Avatar";
+import {format, formatDistanceToNow} from "date-fns";
+import ptBR from "date-fns/locale/pt-BR";
 
-export function Post(){
+export function Post(props){
+    const publishedDateFormatted = format(props.publishedAt, "d 'de' LLLL 'às' HH:mm'h'" , {
+        locale: ptBR
+    })
+
+    const publishedDateRelativeToNow = formatDistanceToNow(props.publishedAt, {
+        locale: ptBR,
+        addSuffix: true
+    })
     return(
         <article className={styles.post}>
             <header>
                 <div className={styles.author}>
-                    <Avatar src="https://avatars.githubusercontent.com/u/1480579?v=4" alt="Carlos Clayton"/>
+                    <Avatar src={props.author.avatarUrl} alt="Carlos Clayton"/>
 
                     <div className={styles.authorInfo}>
-                        <strong>Carlos Clayton</strong>
-                        <span>Web Developer</span>
+                        <strong>{props.author.name}</strong>
+                        <span>{props.author.role}</span>
                     </div>
                 </div>
 
-                <time title="11 de Dezembro às 10:20">Publicado há 1h</time>
+                <time title={publishedDateFormatted} dateTime={props.publishedAt.toISOString()}>
+                    {publishedDateRelativeToNow}
+                </time>
             </header>
 
             <div className={styles.content}>
-                <p>Fala galeraa 👋</p>
-                <p>Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀</p>
-                <p>
-                    <a href="jane.design/doctorcare"> 👉 jane.design/doctorcare</a>
-                </p>
-                <p>
-                    <a href="">#novoprojeto </a>
-                    <a href="">#nlw </a>
-                    <a href="">#rocketseat</a>
-                </p>
+                {
+                    props.contents.map(content => {
+                        if(content.type === 'paragraph'){
+                            return (
+                                <p>{content.content}</p>
+                            )
+                        }else{
+                            return (
+                                <p><a href="">{content.content}</a></p>
+                            )
+                        }
+                    })
+                }
+
             </div>
 
             <form className={styles.commentForm}>
