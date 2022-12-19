@@ -19,11 +19,11 @@ const posts = [
             role: 'Web Developer'
         },
         contents: [
-            {type: 'paragraph', content: 'Fala galeraa 👋'},
-            {type: 'paragraph', content: 'Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀'},
-            {type: 'paragraph', content: 'Fala galeraa 👋'},
-            {type: 'link', content: 'jane.design/doctorcare'},
-            {type: 'link', content: '#novoprojeto'},
+            {id: 1, type: 'paragraph', content: 'Fala galeraa 👋'},
+            {id: 2, type: 'paragraph', content: 'Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀'},
+            {id: 3, type: 'paragraph', content: 'Fala galeraa 👋'},
+            {id: 4, type: 'link', content: 'jane.design/doctorcare'},
+            {id: 5, type: 'link', content: '#novoprojeto'},
         ],
         publishedAt: new Date('2022-05-03 20:00:00')
     },
@@ -35,12 +35,12 @@ const posts = [
             role: 'Web Developer'
         },
         contents: [
-            {type: 'paragraph', content: 'Fala galeraa 👋'},
-            {type: 'paragraph', content: 'Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀'},
-            {type: 'paragraph', content: 'Fala galeraa 👋'},
-            {type: 'link', content: '#novoprojeto'},
-            {type: 'link', content: '#nlw '},
-            {type: 'link', content: '#rocketseat'}
+            {id: 1, type: 'paragraph', content: 'Fala galeraa 👋'},
+            {id: 2, type: 'paragraph', content: 'Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀'},
+            {id: 3, type: 'paragraph', content: 'Fala galeraa 👋'},
+            {id: 5, type: 'link', content: '#novoprojeto'},
+            {id: 6, type: 'link', content: '#nlw '},
+            {id: 7, type: 'link', content: '#rocketseat'}
 
         ],
         publishedAt: new Date('2022-06-03 10:50:00')
@@ -57,7 +57,7 @@ function App() {
                 {
                     posts.map(post => {
                         return (
-                            <Post
+                            <Post key={post.id}
                             author={post.author}
                             contents={post.contents}
                             publishedAt={post.publishedAt}
